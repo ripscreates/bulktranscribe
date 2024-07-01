@@ -4,6 +4,7 @@ from pydub import AudioSegment
 import numpy as np
 import torch
 import os
+import time
 
 def transcribe_audio_chunk(processor, model, audio_chunk):
     audio_input = np.array(audio_chunk.get_array_of_samples(), dtype=np.float32) / 32768.0  # Normalize audio
@@ -68,13 +69,22 @@ def main():
     for audio_file in audio_files:
         if audio_file.endswith(".mp3"):  # Assuming all files are in .mp3 format
             audio_path = os.path.join(audio_folder, audio_file)
+            
+            # Start timer
+            start_time = time.time()
+            
             text = transcribe_audio(processor, model, audio_path)
+
+            # Stop timer
+            end_time = time.time()
+            elapsed_time = end_time - start_time
 
             # Write transcript to text file
             output_file = os.path.join(output_folder, os.path.splitext(audio_file)[0] + ".txt")
             with open(output_file, "w") as f:
                 f.write(text)
             print(f"Transcription saved to: {output_file}")
+            print(f"Time taken for {audio_file}: {elapsed_time:.2f} seconds")
 
     print("Transcription process completed.")
 
