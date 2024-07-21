@@ -55,8 +55,10 @@ To install `ffmpeg`, follow the installation instructions for your operating sys
    - Navigate to the directory containing the script.
    - Execute the script with the following command:
      ```bash
-     python transcribe_audio.py
+     python bulktranscribe.py
      ```
+     or whatever the script you downloaded is named.
+     also depending on the version installed double check if you need to type python or python3
 
 2. **Input Prompts**:
    - The script will prompt you to enter the path to the folder containing your audio files.
